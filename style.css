@@ -9,7 +9,7 @@ body {
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
-.all-contents {
+#all-contents {
   max-width: 1500px;
   min-height: 100vh;
   margin: 0 auto;
@@ -165,3 +165,58 @@ nav h1 {
   border-color: #000;
   transform: translateY(-2px);
 }
+/* portfolio styles
+*/
+.content h1 {
+  color: black;
+}
+
+#portfolio {
+  list-style: none;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+#portfolio li {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#portfolio a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: #444;
+  padding: 18px 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: #fefefd;
+  border: 1px solid #fcfbfb;
+  border-radius: 12px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+#portfolio a:hover {
+  background: #baffcd;
+  color: #444;
+  transform: translateX(4px);
+}
+
+#portfolio a::after {
+  content: "->";
+  font-size: 0.85rem;
+  opacity: 0.4;
+  transition: opacity 0.25s ease;
+  white-space: nowrap;
+}
+
+#portfolio a:hover::after {
+  opacity: 1;
+}
+
