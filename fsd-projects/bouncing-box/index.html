@@ -54,17 +54,25 @@
         });
 
         // Every 50 milliseconds, call the update Function (see below)
-        setInterval(update, 50);
+        var interval = setInterval(update, 50);
 
         // Every time the box is clicked, call the handleBoxClick Function (see below)
         box.on("click", handleBoxClick);
+        board.on("click", handleBoardClick);
+
 
         // moves the Box to a new position on the screen along the X-Axis
         function moveBoxTo(newPositionX, newPositionY) {
   box.css("left", newPositionX);
   box.css("top", newPositionY);
 }
+function getRandomColor() {
+  var red = Math.floor(Math.random() * 256);
+  var green = Math.floor(Math.random() * 256);
+  var blue = Math.floor(Math.random() * 256);
 
+  return "rgb(" + red + ", " + green + ", " + blue + ")";
+}
 
         // changes the text displayed on the Box
         function changeBoxText(newText) {
@@ -82,6 +90,8 @@
         var positionY = 100;
         var speedY = 8;
         var randNum = Math.random() * 100;
+        var misClicks = 0;
+        
 
 
 
@@ -108,13 +118,20 @@
           if (positionY > boardHeight - 72){
             speedY *= -1;
           }
-
-
-        
-
-          
         }
+        function handleBoardClick() {
+  misClicks += 1;
 
+  if (misClicks >= 10) {
+    endGame();
+    changeBoxText("Game Over");
+  }
+}
+
+function endGame() {
+  clearInterval(interval);
+}
+          
         /**
          * This Function will be called each time the box is clicked.
          * Each time it is called, it should perform each of the following actions:
@@ -122,11 +139,20 @@
          * - increase the speed
          * - move the box to the left side of the screen.
          */
-        function handleBoxClick() {
-          positionX = 0;
+        function handleBoxClick(event) {
+          event.stopPropagation();
+          
+          positionX = Math.random() * (boardWidth - box.width());
+          positionY = Math.random() * (boardHeight - box.height());
+          
+          moveBoxTo(positionX, positionY);
+
+          box.css("background-color", getRandomColor());
+
           changeBoxText(points);
           points += 1;
           speed = 3 * points + 10;
+          
 
 
 
